@@ -1,0 +1,22 @@
+body {
+    background-color: #ffa500;
+    text-align: center;
+    color: white;
+}
+
+button{
+    padding: 10px 20px;
+    background-color: orangered;
+    border: 1px solid white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#time {
+    font-size: 24px;
+}
+
+button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}

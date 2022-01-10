@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skaiciuokle</title>
+</head>
+<link rel="stylesheet" href="/style.css">
+
+<body>
+    <h1>StopWach</h1>
+    <h2>VANILA JAVASCRIPT STOPWACH</h2>
+   <h3 id="now"></h3>
+    <p id="time">0:00</p>
+    
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+
+
+<script>
+const today = new Date();
+const now = document.getElementById("now");
+now.innerText = today.toDateString();
+
+const time = document.getElementById("time");
+const startButton = document.getElementById("start");
+startButton.addEventListener("click", startTime);
+
+let sec = 0;
+let min = 0;
+let isTimerStarted = false;
+
+function addSecond(){
+    if (isTimerStarted){
+    sec++;
+    if(sec<=9){
+        sec = sec;
+    }
+    if(sec >=60){
+        min++
+        sec = 0;
+    }
+   
+    const additionalMinZero = additionalZero(min);
+    const additionalSecZero = additionalZero(sec);
+
+    time.innerText = `${additionalMinZero}${min}:${additionalSecZero}${sec}`;
+    setTimeout(addSecond, 1000);
+    }
+   
+}
+
+function additionalZero (time){
+ return time <=9 ? "0" : "";
+}
+
+function startTime(){
+    if(isTimerStarted === false){
+    isTimerStarted = true;
+    addSecond();
+    startButton.disabled = true;
+    }
+    
+}
+
+const stopButton = document.getElementById("stop");
+stopButton.addEventListener("click", stopTime);
+
+
+function stopTime(){
+isTimerStarted = false;
+startButton.disabled = false;
+}
+
+const resetButton = document.getElementById("reset");
+resetButton.addEventListener("click", resetTime);
+
+function resetTime() {
+    sec = 0;
+    min = 0;
+    time.innerText = "00:00";
+    stopTime();
+}
+</script>
+
+</body>
+</html>
